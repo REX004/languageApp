@@ -35,4 +35,22 @@
     <string name="belarus">Belarus</string>
     <string name="kazakh">Kazakh</string>
     <string name="choose">Choose</string>
+    <string name="hello_emil">Hello, Amir</string>
+    <string name="main_description">Are you ready for learning today?</string>
+    <string name="top_users">Top users</string>
+    <string name="user_example">Dmitri Ivanovich Mendeleev</string>
+    <string name="logout">Logout</string>
+    <string name="switch_to_dark">Switch to Dark</string>
+    <string name="change_mother_language">Change mother language</string>
+    <string name="change_your_image">Change your image</string>
+    <string name="your_photo_is_gorgeous">Your photo is gorgeous!</string>
+    <string name="just_resize_that_photo_for_fit_in_square">Just resize that photo \nfor fit in square</string>
+    <string name="use_that_image">Use that image</string>
+    <string name="photot_review">Photot review</string>
+    <string name="available_excersises">Available excersises</string>
+    <string name="guess_the_animal">Guess the animal</string>
+    <string name="word_practice">Word practice</string>
+    <string name="game">Game</string>
+    <string name="audition">Audition</string>
+    <string name="check">Check</string>
 </resources>

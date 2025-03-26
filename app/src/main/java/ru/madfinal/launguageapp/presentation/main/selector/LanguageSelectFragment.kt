@@ -1,4 +1,4 @@
-package ru.madfinal.launguageapp.presentation.selector
+package ru.madfinal.launguageapp.presentation.main.selector
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

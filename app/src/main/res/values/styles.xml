@@ -10,6 +10,15 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="heading_4">
+        <item name="android:fontFamily">@font/fredoka_semi_bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineHeight">34dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:letterSpacing">0.015</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="h6_text">
         <item name="android:fontFamily">@font/fredoka_medium</item>
         <item name="android:textSize">20sp</item>

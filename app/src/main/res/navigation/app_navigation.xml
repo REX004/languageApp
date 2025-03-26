@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/onboardingMainFragment">
+    app:startDestination="@id/mainScreenFragment">
 
     <fragment
         android:id="@+id/onboardingMainFragment"
@@ -12,7 +12,78 @@
         tools:layout="@layout/fragment_onboarding_main" />
     <fragment
         android:id="@+id/languageSelectFragment"
-        android:name="ru.madfinal.launguageapp.presentation.selector.LanguageSelectFragment"
+        android:name="ru.madfinal.launguageapp.presentation.main.selector.LanguageSelectFragment"
         android:label="fragment_language_select"
         tools:layout="@layout/fragment_language_select" />
+    <fragment
+        android:id="@+id/onboarding1Fragment"
+        android:name="ru.madfinal.launguageapp.presentation.onboarding.Onboarding1Fragment"
+        android:label="Onboarding1Fragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="ru.madfinal.launguageapp.presentation.auth.signup.SignupFragment"
+        android:label="SignupFragment" />
+    <fragment
+        android:id="@+id/signupPassFragment"
+        android:name="ru.madfinal.launguageapp.presentation.auth.signupPass.SignupPassFragment"
+        android:label="SignupPassFragment" />
+    <fragment
+        android:id="@+id/animalsFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsFragment"
+        android:label="fragment_animals"
+        tools:layout="@layout/fragment_animals" />
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" />
+    <fragment
+        android:id="@+id/listeningFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.listen.ListeningFragment"
+        android:label="fragment_listening"
+        tools:layout="@layout/fragment_listening" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="ru.madfinal.launguageapp.presentation.auth.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="ru.madfinal.launguageapp.presentation.main.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.madfinal.launguageapp.presentation.main.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_profileFragment_to_resizePhotoFragment"
+            app:destination="@id/resizePhotoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/resizePhotoFragment"
+        android:name="ru.madfinal.launguageapp.presentation.main.profile.resizePhoto.ResizePhotoFragment"
+        android:label="Resize Photo"
+        tools:layout="@layout/fragment_resize_photo">
+
+        <argument
+            android:name="imageUri"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/wordPracticeFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.wordpractice.WordPracticeFragment"
+        android:label="fragment_word_practice"
+        tools:layout="@layout/fragment_word_practice" />
 </navigation>

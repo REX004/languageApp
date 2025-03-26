@@ -127,4 +127,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
+
+    //image croper
+    implementation("com.github.CanHub:Android-Image-Cropper:4.3.2")
+
 }

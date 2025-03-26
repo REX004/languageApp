@@ -13,4 +13,7 @@
     <color name="gray_dark">#656872</color>
     <color name="state_inactive">#FFF6EB</color>
     <color name="orange">#F76400</color>
+    <color name="green">#5BA890</color>
+    <color name="grey">#B6B6B6</color>
+    <color name="gray_light">#E5E5E5</color>
 </resources>
