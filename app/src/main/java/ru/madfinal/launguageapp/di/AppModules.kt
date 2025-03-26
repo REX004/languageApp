@@ -6,11 +6,16 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import ru.madfinal.lastweeksproject.data.datasource.network.retrofit.SupabaseNetworkModule
+import ru.madfinal.launguageapp.data.exercise.animals.AnimalRepositoryImpl
 import ru.madfinal.launguageapp.data.exercise.wordPractice.WordPracticeRepositoryImpl
 import ru.madfinal.launguageapp.data.main.repository.MainRepositoryImpl
+import ru.madfinal.launguageapp.domain.exercise.animals.repository.AnimalRepository
+import ru.madfinal.launguageapp.domain.exercise.animals.usecase.GetRandomAnimalUseCase
 import ru.madfinal.launguageapp.domain.exercise.wordPractice.repository.WordPracticeRepository
 import ru.madfinal.launguageapp.domain.exercise.wordPractice.usecase.GetRandomWordUseCase
 import ru.madfinal.launguageapp.domain.main.MainRepository
+import ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsViewModel
+import ru.madfinal.launguageapp.presentation.exercise.animals.TensorFlowHelper
 import ru.madfinal.launguageapp.presentation.exercise.wordpractice.WordPracticeViewModel
 import ru.madfinal.launguageapp.presentation.main.MainViewModel
 
@@ -37,29 +42,30 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-//    single<AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
-//    single { UserMapper() }
+    single<AnimalRepository> { AnimalRepositoryImpl(get(), get()) }
     single<WordPracticeRepository> { WordPracticeRepositoryImpl(get(), get()) }
     single<MainRepository> { MainRepositoryImpl(get(), get()) }
 }
 
 val useCaseModule = module {
-//    factory { LoginUseCase(get()) }
     factory { GetRandomWordUseCase(get()) }
-//    factory { GetInterestUseCase(get()) }
-//    factory { GetExchangesUseCase(get()) }
+    factory { GetRandomAnimalUseCase(get()) }
 }
 
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { WordPracticeViewModel(get()) }
-//    viewModel { InterestViewModel(get()) }
-//    viewModel { ExchangeViewModel(get()) }
+    viewModel { AnimalsViewModel(get(), get()) }
+}
+
+val helperModule = module {
+    single { TensorFlowHelper(androidContext()) }
 }
 
 val appModules = listOf(
     networkModule,
     repositoryModule,
     useCaseModule,
-    viewModelModule
+    viewModelModule,
+    helperModule
 )

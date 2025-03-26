@@ -31,3 +31,21 @@ object SupabaseNetworkModule {
         return retrofit.create(SupabaseApi::class.java)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -31,7 +31,14 @@
         android:id="@+id/animalsFragment"
         android:name="ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsFragment"
         android:label="fragment_animals"
-        tools:layout="@layout/fragment_animals" />
+        tools:layout="@layout/fragment_animals">
+        <action
+            android:id="@+id/action_animalsFragment_to_animalsSuccessFragment"
+            app:destination="@id/animalsSuccessFragment" />
+        <action
+            android:id="@+id/action_animalsFragment_to_animalsErrorFragment"
+            app:destination="@id/animalsErrorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="ru.madfinal.launguageapp.presentation.exercise.game.GameFragment"
@@ -86,4 +93,27 @@
         android:name="ru.madfinal.launguageapp.presentation.exercise.wordpractice.WordPracticeFragment"
         android:label="fragment_word_practice"
         tools:layout="@layout/fragment_word_practice" />
+    <fragment
+        android:id="@+id/animalsErrorFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.states.AnimalsErrorFragment"
+        android:label="AnimalsErrorFragment">
+        <argument
+            android:name="correctWord"
+            android:defaultValue="unknown"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalsSuccessFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.states.AnimalsSuccessFragment"
+        android:label="fragment_animals_success"
+        tools:layout="@layout/fragment_animals_success">
+        <argument
+            android:name="score"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="consecutiveCorrect"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
 </navigation>

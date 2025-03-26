@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.exercise.animals.AnimalsFragment">
+
+    <LinearLayout
+        android:id="@+id/toolbarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/backBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            style="@style/h5_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:fontFamily="@font/fredoka_medium"
+            android:text="@string/guess_the_animal"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_success"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_error_screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
+
+    <TextView
+        android:id="@+id/error_text"
+        style="@style/h5_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_success" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextBt"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="27dp"
+        android:text="@string/next"
+        app:layout_constraintTop_toBottomOf="@id/error_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tryAgainBt"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="27dp"
+        android:text="@string/try_again"
+        app:layout_constraintTop_toBottomOf="@id/nextBt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package ru.madfinal.launguageapp.data.datasource.network.supabase
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
+import ru.madfinal.launguageapp.domain.models.Animal
 import ru.madfinal.launguageapp.domain.models.User
 import ru.madfinal.launguageapp.domain.models.Word
 
@@ -59,4 +60,10 @@ interface SupabaseApi {
         @Header("apiKey") apiKey: String,
         @Query("select") fields: String = "id,english,russian,transcription_english" // Выбираем все нужные поля
     ): Single<List<Word>>
+
+    @GET("rest/v1/animals")
+    fun getAnimal(
+        @Header("apiKey") apiKey: String,
+        @Query("select") fields: String = "*"
+    ): Single<List<Animal>>
 }

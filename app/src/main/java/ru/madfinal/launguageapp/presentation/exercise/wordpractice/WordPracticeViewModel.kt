@@ -81,7 +81,6 @@ class WordPracticeViewModel(private val getRandomWordUseCase: GetRandomWordUseCa
 
         _isAnswerChecked.value = true
         val currentWordValue = _currentWord.value ?: return
-        // Используем isEnglishTurn
         val correctAnswerValue =
             if (_isEnglishTurn.value == true) currentWordValue.english else currentWordValue.russian
         _correctAnswer.value = correctAnswerValue
