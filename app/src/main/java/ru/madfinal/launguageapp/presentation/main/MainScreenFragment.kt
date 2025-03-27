@@ -35,6 +35,9 @@ class MainScreenFragment :
         binding.animalBt.setOnClickListener {
             findNavController().navigateWithAnimation(R.id.animalsFragment)
         }
+        binding.auditionBt.setOnClickListener {
+            findNavController().navigateWithAnimation(R.id.listeningFragment)
+        }
     }
 
     private fun observeViewModel() {

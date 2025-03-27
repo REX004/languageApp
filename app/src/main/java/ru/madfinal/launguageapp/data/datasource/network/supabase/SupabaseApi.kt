@@ -1,5 +1,6 @@
 package ru.madfinal.launguageapp.data.datasource.network.supabase
 
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 import ru.madfinal.launguageapp.domain.models.Animal
@@ -66,4 +67,20 @@ interface SupabaseApi {
         @Header("apiKey") apiKey: String,
         @Query("select") fields: String = "*"
     ): Single<List<Animal>>
+
+
+    @GET("rest/v1/users")
+    fun getUserById(
+        @Header("apiKey") apiKey: String,
+        @Query("id") userId: String,
+        @Query("select") fields: String = "*"
+    ): Single<List<User>>
+
+
+    @PATCH("rest/v1/users")
+    fun updateUserScore(
+        @Header("apiKey") apiKey: String,
+        @Query("id") userId: String,
+        @Body scoreUpdate: Map<String, Int>
+    ): Completable
 }

@@ -20,7 +20,7 @@ object SupabaseNetworkModule {
 
     fun provideRetrofit(baseUrl: String, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl("https://mngcisyjmvbmebnlapht.supabase.co")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
@@ -31,21 +31,3 @@ object SupabaseNetworkModule {
         return retrofit.create(SupabaseApi::class.java)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
