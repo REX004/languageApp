@@ -11,7 +11,6 @@ class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return 3
     }
-
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> Onboarding1Fragment()
@@ -21,7 +20,5 @@ class OnboardingAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 throw RuntimeException("Invalid position")
             }
         }
-
     }
-
 }
