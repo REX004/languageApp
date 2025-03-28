@@ -32,7 +32,7 @@ import ru.madfinal.launguageapp.domain.exercise.speech.SpeechRecognitionReposito
 import ru.madfinal.launguageapp.domain.exercise.word.WordRepository
 import ru.madfinal.launguageapp.domain.exercise.wordPractice.repository.WordPracticeRepository
 import ru.madfinal.launguageapp.domain.exercise.wordPractice.usecase.GetRandomWordUseCase
-import ru.madfinal.launguageapp.domain.main.MainRepository
+import ru.madfinal.launguageapp.domain.main.repository.MainRepository
 import ru.madfinal.launguageapp.presentation.auth.login.LoginViewModel
 import ru.madfinal.launguageapp.presentation.auth.signup.SignupViewModel
 import ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsViewModel

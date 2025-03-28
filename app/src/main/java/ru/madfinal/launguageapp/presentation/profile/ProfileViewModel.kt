@@ -1,4 +1,4 @@
-package ru.madfinal.launguageapp.presentation.main.profile
+package ru.madfinal.launguageapp.presentation.profile
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package ru.madfinal.launguageapp.presentation.main.profile.resizePhoto
+package ru.madfinal.launguageapp.presentation.profile.resizePhoto
 
 import android.content.Context
 import android.graphics.Bitmap

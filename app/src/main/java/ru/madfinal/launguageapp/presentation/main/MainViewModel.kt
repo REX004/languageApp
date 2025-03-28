@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import ru.madfinal.launguageapp.domain.main.MainRepository
+import ru.madfinal.launguageapp.domain.main.repository.MainRepository
 import ru.madfinal.launguageapp.domain.models.User
 
 class MainViewModel(private val repository: MainRepository) : ViewModel() {
