@@ -3,51 +3,56 @@ package ru.madfinal.launguageapp.data.datasource.network.supabase
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
+import ru.madfinal.lastweeksproject.data.datasource.network.config.NetworkConfig
+import ru.madfinal.launguageapp.data.auth.models.AuthRequest
+import ru.madfinal.launguageapp.data.auth.models.AuthResponse
+import ru.madfinal.launguageapp.data.auth.models.SignupRequest
+import ru.madfinal.launguageapp.data.auth.models.UserDto
+import ru.madfinal.launguageapp.data.auth.models.UserUpdateDto
 import ru.madfinal.launguageapp.domain.models.Animal
 import ru.madfinal.launguageapp.domain.models.User
 import ru.madfinal.launguageapp.domain.models.Word
 
 
 interface SupabaseApi {
-//    @POST("auth/v1/token?grant_type=${NetworkConfig.GRANT_TYPE_PASSWORD}")
-//    fun login(@Body request: AuthRequest): Single<AuthResponse>
-//
-//    @POST("auth/v1/logout")
-//    fun logout(@Header("Authorization") authToken: String): Completable
+    @POST("auth/v1/token?grant_type=${NetworkConfig.GRANT_TYPE_PASSWORD}")
+    fun login(
+        @Body request: AuthRequest,
+        @Header("apiKey") authToken: String,
+    ): Single<AuthResponse>
 
-//    @GET("rest/v1/users")
-//    fun getUsers(
-//        @Header("Authorization") authToken: String,
-//        @Query("select") fields: String = "*"
-//    ): Single<List<UserDto>>
-//
-//    @GET("rest/v1/users")
-//    fun getUserById(
-//        @Header("Authorization") authToken: String,
-//        @Query("id") id: String,
-//        @Query("select") fields: String = "*"
-//    ): Single<List<UserDto>>
-//
-//    @POST("rest/v1/users")
-//    fun createUser(
-//        @Header("Authorization") authToken: String,
-//        @Header("Prefer") prefer: String = "return=representation",
-//        @Body user: UserDto
-//    ): Single<List<UserDto>>
-//
-//    @PATCH("rest/v1/users")
-//    fun updateUser(
-//        @Header("Authorization") authToken: String,
-//        @Header("Prefer") prefer: String = "return=representation",
-//        @Query("id") id: String,
-//        @Body user: UserUpdateDto
-//    ): Single<List<UserDto>>
-//
-//    @DELETE("rest/v1/users")
-//    fun deleteUser(
-//        @Header("Authorization") authToken: String,
-//        @Query("id") id: String
-//    ): Completable
+    @POST("auth/v1/token?grant_type=${NetworkConfig.GRANT_TYPE_PASSWORD}")
+    fun signup(@Body request: SignupRequest): Single<AuthResponse>
+
+    @POST("auth/v1/logout")
+    fun logout(@Header("Authorization") authToken: String): Completable
+
+    @GET("rest/v1/users")
+    fun getUsers(
+        @Header("Authorization") authToken: String,
+        @Query("select") fields: String = "*"
+    ): Single<List<UserDto>>
+
+    @POST("rest/v1/users")
+    fun createUser(
+        @Header("Authorization") authToken: String,
+        @Header("Prefer") prefer: String = "return=representation",
+        @Body user: UserDto
+    ): Single<List<UserDto>>
+
+    @PATCH("rest/v1/users")
+    fun updateUser(
+        @Header("Authorization") authToken: String,
+        @Header("Prefer") prefer: String = "return=representation",
+        @Query("id") id: String,
+        @Body user: UserUpdateDto
+    ): Single<List<UserDto>>
+
+    @DELETE("rest/v1/users")
+    fun deleteUser(
+        @Header("Authorization") authToken: String,
+        @Query("id") id: String
+    ): Completable
 
     @GET("rest/v1/users")
     fun getTopUsers(

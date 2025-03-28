@@ -1,7 +1,7 @@
 package ru.madfinal.launguageapp.domain.models
 
 data class User(
-    val id: Int? = null,
+    val id: String = null.toString(),
     val nickName: String? = null,
     val name: String? = null,
     val lastName: String? = null,

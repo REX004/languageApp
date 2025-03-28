@@ -25,9 +25,20 @@ class UserPreferences(context: Context) {
         return sharedPreferences.getInt(KEY_USER_SCORE, 0)
     }
 
+    fun setLoggedIn(isLoggedIn: Boolean) {
+        sharedPreferences.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
+    }
+
     companion object {
         private const val PREFS_NAME = "user_preferences"
         private const val KEY_USER_ID = "user_id"
         private const val KEY_USER_SCORE = "user_score"
+        private const val KEY_IS_LOGGED_IN = "is_logged_in"
     }
+
+
 }

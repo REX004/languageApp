@@ -30,17 +30,13 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <TextView
             android:id="@+id/userNick"
             style="@style/body_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineHeight="22dp"
+            android:layout_marginStart="40dp"
             android:maxLines="2"
             android:textAlignment="gravity"
             android:text="@string/user_example"
