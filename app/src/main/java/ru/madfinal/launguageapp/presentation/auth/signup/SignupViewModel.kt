@@ -32,7 +32,9 @@ class SignupViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { user -> _signupState.value = UiState.Success(user) },
-                { error -> _signupState.value = UiState.Error(error.message ?: "Ошибка регистрации") }
+                { error ->
+                    _signupState.value = UiState.Error(error.message ?: "Ошибка регистрации")
+                }
             )
 
         disposables.add(disposable)
