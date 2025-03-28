@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/mainScreenFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/onboardingMainFragment"
@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="ru.madfinal.launguageapp.presentation.main.profile.ProfileFragment"
+        android:name="ru.madfinal.launguageapp.presentation.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
 
@@ -67,7 +67,7 @@
 
     <fragment
         android:id="@+id/resizePhotoFragment"
-        android:name="ru.madfinal.launguageapp.presentation.main.profile.resizePhoto.ResizePhotoFragment"
+        android:name="ru.madfinal.launguageapp.presentation.profile.resizePhoto.ResizePhotoFragment"
         android:label="Resize Photo"
         tools:layout="@layout/fragment_resize_photo">
 

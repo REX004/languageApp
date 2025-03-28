@@ -1,7 +1,6 @@
-package ru.madfinal.launguageapp.presentation.main.profile;
+package ru.madfinal.launguageapp.presentation.profile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,8 +9,10 @@ import android.view.View;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.fragment.findNavController;
+import ru.madfinal.launguageapp.R
 import ru.madfinal.launguageapp.databinding.FragmentProfileBinding;
 import ru.madfinal.launguageapp.presentation.common.base.BaseFragment;
+import ru.madfinal.launguageapp.presentation.util.navigateWithAnimation
 import java.io.File
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
@@ -56,6 +57,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.logoutBt.setOnClickListener {
             logout()
         }
+        binding.changeLanguageBt.setOnClickListener {
+            findNavController().navigateWithAnimation(R.id.languageSelectFragment)
+        }
     }
 
     private fun loadSavedProfileImage() {
@@ -71,7 +75,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun setupCroppedImageObserver() {
-        // Получаем обрезанное изображение
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("croppedImage")
             ?.observe(viewLifecycleOwner) { uriString ->
                 Log.d("ProfileFragment", "Received cropped image URI: $uriString")

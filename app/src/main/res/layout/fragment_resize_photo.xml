@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1B1815"
-    tools:context=".presentation.main.profile.resizePhoto.ResizePhotoFragment">
+    tools:context=".presentation.profile.resizePhoto.ResizePhotoFragment">
 
     <LinearLayout
         android:id="@+id/toolbarContainer"

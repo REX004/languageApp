@@ -38,6 +38,9 @@ class MainScreenFragment :
         binding.auditionBt.setOnClickListener {
             findNavController().navigateWithAnimation(R.id.listeningFragment)
         }
+        binding.toolbarContainer.setOnClickListener {
+            findNavController().navigateWithAnimation(R.id.profileFragment)
+        }
     }
 
     private fun observeViewModel() {

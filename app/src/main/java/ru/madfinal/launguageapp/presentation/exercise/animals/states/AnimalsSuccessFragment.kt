@@ -37,7 +37,6 @@ class AnimalsSuccessFragment :
         super.onViewCreated(view, savedInstanceState)
         setupUI()
         setupAR()
-        setupListeners()
         if (!ArCoreApk.getInstance().checkAvailability(requireContext()).isSupported) {
             Toast.makeText(
                 context,
@@ -56,6 +55,17 @@ class AnimalsSuccessFragment :
             }
             exitArButton.setOnClickListener {
                 backPressed()
+            }
+            nextBt.setOnClickListener {
+                findNavController().navigateWithAnimation(R.id.animalsFragment)
+            }
+
+            backBt.setOnClickListener {
+                findNavController().navigateWithAnimation(R.id.mainScreenFragment)
+            }
+
+            arToggleButton.setOnClickListener {
+                toggleARVisibility()
             }
         }
     }
@@ -157,20 +167,6 @@ class AnimalsSuccessFragment :
     }
 
     private fun addAnimalInfoNode(parentNode: AnchorNode, animalName: String) {
-    }
-
-    private fun setupListeners() {
-        binding.nextBt.setOnClickListener {
-            findNavController().navigateWithAnimation(R.id.animalsFragment)
-        }
-
-        binding.backBt.setOnClickListener {
-            backPressed()
-        }
-
-        binding.arToggleButton.setOnClickListener {
-            toggleARVisibility()
-        }
     }
 
     private fun toggleARVisibility() {
