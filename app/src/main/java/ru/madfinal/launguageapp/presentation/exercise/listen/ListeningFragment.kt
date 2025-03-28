@@ -58,58 +58,43 @@ class ListeningFragment :
     }
 
     private fun setupObservers() {
-        viewModel.currentWord.observe(viewLifecycleOwner) { word ->
-            updateWordUI(word)
-        }
-
-        viewModel.recognitionResult.observe(viewLifecycleOwner) { result ->
-            handleRecognitionResult(result)
-        }
-
-        viewModel.isRecognizing.observe(viewLifecycleOwner) { isRecognizing ->
-            if (isRecognizing) {
-                binding.resultWord.text = getString(R.string.recognizing)
-            }
-        }
-
-        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-            resetUIState()
-        }
+        viewModel.currentWord.observe(viewLifecycleOwner, ::updateWordUI)
+        viewModel.recognitionResult.observe(viewLifecycleOwner, ::handleRecognitionResult)
+        viewModel.isRecognizing.observe(viewLifecycleOwner, ::updateRecognitionStatus)
+        viewModel.error.observe(viewLifecycleOwner, ::showErrorToast)
     }
 
     private fun setupListeners() {
-        // Кнопка назад
-        binding.backBt.setOnClickListener {
-            findNavController().navigateUp()
-        }
-
-        // Кнопка проверки произношения
-        binding.checkBt.setOnClickListener {
-            // Скрываем основную кнопку и показываем круглую кнопку микрофона
-            binding.checkBt.visibility = View.GONE
-            binding.microBt.visibility = View.VISIBLE
-
-            // Начинаем запись при нажатии на круглую кнопку
-            binding.microBt.setOnClickListener {
-                if (isRecording.get()) {
-                    stopRecording()
-                } else {
-                    checkPermissionAndStartRecording()
-                }
-            }
-
-            // Автоматически запускаем запись
-            checkPermissionAndStartRecording()
-        }
+        binding.backBt.setOnClickListener { findNavController().navigateUp() }
+        setupCheckButton()
     }
 
     private fun updateWordUI(word: Word) {
         binding.wordTxt.text = word.english
         binding.transcriptionTxt.text = word.transcription_english
-
-        // Сбрасываем UI в начальное состояние
         resetUIState()
+    }
+
+    private fun setupCheckButton() {
+        binding.checkBt.setOnClickListener {
+            binding.checkBt.visibility = View.GONE
+            binding.microBt.visibility = View.VISIBLE
+            binding.microBt.setOnClickListener { toggleRecording() }
+            checkPermissionAndStartRecording()
+        }
+    }
+    private fun updateRecognitionStatus(isRecognizing: Boolean) {
+        if (isRecognizing) {
+            binding.resultWord.text = getString(R.string.recognizing)
+        }
+    }
+
+    private fun toggleRecording() {
+        if (isRecording.get()) {
+            stopRecording()
+        } else {
+            checkPermissionAndStartRecording()
+        }
     }
 
     private fun resetUIState() {
@@ -138,6 +123,11 @@ class ListeningFragment :
 
             checkPermissionAndStartRecording()
         }
+    }
+
+    private fun showErrorToast(errorMessage: String) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        resetUIState()
     }
 
     private fun checkPermissionAndStartRecording() {
@@ -170,13 +160,6 @@ class ListeningFragment :
                 Manifest.permission.RECORD_AUDIO
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return
         }
         audioRecord = AudioRecord(
@@ -265,17 +248,14 @@ class ListeningFragment :
     }
 
     private fun handleRecognitionResult(result: String) {
-        // Отображаем распознанный текст
         binding.resultWord.text = result
 
-        val currentWord = viewModel.currentWord.value?.english?.toLowerCase(Locale.ROOT) ?: ""
-        val recognizedText = result.toLowerCase(Locale.ROOT).trim()
+        val currentWord = viewModel.currentWord.value?.english?.lowercase(Locale.ROOT) ?: ""
+        val recognizedText = result.lowercase(Locale.ROOT).trim()
 
         if (recognizedText == currentWord) {
-            // Правильное произношение
             handleCorrectPronunciation()
         } else {
-            // Неправильное произношение
             handleIncorrectPronunciation()
         }
     }

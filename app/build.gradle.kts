@@ -40,6 +40,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
 }
 
 dependencies {
@@ -136,4 +137,15 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite:2.9.0")
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.3.1")
     implementation("org.tensorflow:tensorflow-lite-gpu:2.9.0")
+
+    //Ar
+    val ar_core_version = "1.31.0"
+    val sceneform_version = "1.17.1"
+
+    implementation("com.google.ar:core:$ar_core_version")
+    implementation("com.google.ar.sceneform.ux:sceneform-ux:$sceneform_version")
+    implementation("com.google.ar.sceneform:core:$sceneform_version")
+    implementation("com.google.ar.sceneform:assets:$sceneform_version")
+
+
 }

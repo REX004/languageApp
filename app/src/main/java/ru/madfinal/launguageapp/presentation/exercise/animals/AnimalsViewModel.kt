@@ -43,6 +43,10 @@ class AnimalsViewModel(
         loadRandomAnimal()
     }
 
+    private val _currentAnimalName = MutableLiveData<String>()
+    val currentAnimalName: LiveData<String> = _currentAnimalName
+
+
     fun loadRandomAnimal() {
         _loading.value = true
         compositeDisposable.add(
@@ -121,6 +125,9 @@ class AnimalsViewModel(
 
                 val currentScore = _score.value ?: 0
                 _score.postValue(currentScore + 1 + additionalScore.toInt())
+
+                // Сохраняем название животного
+                _currentAnimalName.postValue(actualAnimalName)
             } else {
                 _consecutiveCorrectAnswers.postValue(0)
             }

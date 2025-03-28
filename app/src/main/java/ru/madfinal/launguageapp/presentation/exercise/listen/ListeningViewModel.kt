@@ -18,6 +18,12 @@ class ListeningViewModel(
     private val speechRecognitionRepository: SpeechRecognitionRepository
 ) : ViewModel() {
 
+    companion object {
+        private const val ERROR_LOAD_WORDS = "Ошибка загрузки слов: %s"
+        private const val ERROR_SPEECH_RECOGNITION = "Ошибка распознавания речи: %s"
+        private const val ERROR_UPDATE_SCORE = "Ошибка обновления счета: %s"
+    }
+
     private val disposables = CompositeDisposable()
 
     private val _currentWord = MutableLiveData<Word>()
@@ -44,39 +50,39 @@ class ListeningViewModel(
             wordRepository.getWords()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ words ->
-                    _wordsCache.clear()
-                    _wordsCache.addAll(words)
-                    if (_currentWord.value == null) {
-                        loadRandomWord()
-                    }
-                }, { error ->
-                    _error.value = "Ошибка загрузки слов: ${error.message}"
-                })
+                .subscribe(
+                    { words -> handleWordsLoaded(words) },
+                    { error -> handleError(ERROR_LOAD_WORDS, error) }
+                )
         )
     }
 
+    private fun handleWordsLoaded(words: List<Word>) {
+        _wordsCache.clear()
+        _wordsCache.addAll(words)
+        if (_currentWord.value == null) {
+            loadRandomWord()
+        }
+    }
+
     fun loadRandomWord() {
-        if (_wordsCache.isEmpty()) {
-            return
-        }
-
-        if (_usedWords.size >= _wordsCache.size) {
-            _usedWords.clear()
-        }
-
-        // Выбираем случайное слово, которое еще не использовалось
-        val availableWords = _wordsCache.filter { it.id !in _usedWords }
+        val availableWords = getAvailableWords()
         if (availableWords.isNotEmpty()) {
             val randomWord = availableWords.random()
             _currentWord.value = randomWord
             _usedWords.add(randomWord.id)
-        } else {
-            // На всякий случай, если фильтрация не сработала
-            val randomWord = _wordsCache.random()
-            _currentWord.value = randomWord
-            _usedWords.add(randomWord.id)
         }
+    }
+
+    private fun getAvailableWords(): List<Word> {
+        if (_wordsCache.isEmpty()) return emptyList()
+
+        // Reset used words if all words have been used
+        if (_usedWords.size >= _wordsCache.size) {
+            _usedWords.clear()
+        }
+
+        return _wordsCache.filter { it.id !in _usedWords }
     }
 
     fun recognizeSpeech(audioFile: File) {
@@ -86,14 +92,21 @@ class ListeningViewModel(
             speechRecognitionRepository.recognizeSpeech(audioFile, "en-US")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ result ->
-                    _isRecognizing.value = false
-                    _recognitionResult.value = result
-                }, { error ->
-                    _isRecognizing.value = false
-                    _error.value = "Ошибка распознавания речи: ${error.message}"
-                })
+                .subscribe(
+                    { result -> handleRecognitionResult(result) },
+                    { error -> handleRecognitionError(error) }
+                )
         )
+    }
+
+    private fun handleRecognitionResult(result: String) {
+        _isRecognizing.value = false
+        _recognitionResult.value = result
+    }
+
+    private fun handleRecognitionError(error: Throwable) {
+        _isRecognizing.value = false
+        handleError(ERROR_SPEECH_RECOGNITION, error)
     }
 
     fun updateScore(newScore: Int) {
@@ -101,12 +114,15 @@ class ListeningViewModel(
             userRepository.updateUserScore(newScore)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    // Успешное обновление счета
-                }, { error ->
-                    _error.value = "Ошибка обновления счета: ${error.message}"
-                })
+                .subscribe(
+                    { /* Success */ },
+                    { error -> handleError(ERROR_UPDATE_SCORE, error) }
+                )
         )
+    }
+
+    private fun handleError(messageTemplate: String, error: Throwable) {
+        _error.value = messageTemplate.format(error.message)
     }
 
     override fun onCleared() {

@@ -2,6 +2,7 @@ package ru.madfinal.launguageapp.presentation.exercise.animals
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -12,7 +13,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.madfinal.launguageapp.R
 import ru.madfinal.launguageapp.databinding.FragmentAnimalsBinding
 import ru.madfinal.launguageapp.presentation.common.base.BaseFragment
 
@@ -27,6 +27,7 @@ class AnimalsFragment : BaseFragment<FragmentAnimalsBinding>(FragmentAnimalsBind
         setupObservers()
         setupListeners()
     }
+
 
     private fun setupObservers() {
         viewModel.currentAnimal.observe(viewLifecycleOwner) { animal ->
@@ -44,12 +45,13 @@ class AnimalsFragment : BaseFragment<FragmentAnimalsBinding>(FragmentAnimalsBind
 
         viewModel.isAnswerCorrect.observe(viewLifecycleOwner) { isCorrect ->
             if (isCorrect) {
-                // Переходим на экран успеха
+                // Переходим на экран успеха с передачей названия животного
                 val action =
                     AnimalsFragmentDirections.actionAnimalsFragmentToAnimalsSuccessFragment(
-                        score = viewModel.score.value ?: 0,
-                        consecutiveCorrect = viewModel.consecutiveCorrectAnswers.value ?: 0
+                        animalName = binding.writerEt.text.toString()
+
                     )
+                Log.d("eee", "Animal name: ${binding.writerEt.text.toString()}")
                 findNavController().navigate(action)
             } else {
                 // Переходим на экран ошибки
