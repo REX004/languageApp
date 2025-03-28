@@ -10,8 +10,8 @@ import ru.madfinal.launguageapp.databinding.FragmentSignupBinding
 import ru.madfinal.launguageapp.presentation.common.UiState
 import ru.madfinal.launguageapp.presentation.common.base.BaseFragment
 
-
 class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
+
     private val viewModel: SignupViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         val email = binding.emailEt.text.toString().trim()
         val name = binding.nameEt.text.toString().trim()
         val lastName = binding.lastNameEt.text.toString().trim()
-        val password = "Ads934 3-"
+        val password = "1234Aa1 !"
 
         viewModel.signUp(email, name, lastName, password)
     }
