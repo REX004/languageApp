@@ -136,11 +136,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     private fun logout() {
-        sharedPreferences.edit().clear().apply();
-        requireActivity().finishAffinity();
-        val intent =
-            requireActivity().packageManager.getLaunchIntentForPackage(requireActivity().packageName);
-        intent?.let { startActivity(it); }
+        sharedPreferences.edit().clear().apply()
+
+        val userPrefs = requireContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        userPrefs.edit().clear().apply()
+
+        findNavController().navigateWithAnimation(R.id.loginFragment)
     }
 
     private val pickImageLauncher =
