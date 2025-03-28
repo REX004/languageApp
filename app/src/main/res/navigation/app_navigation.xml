@@ -27,11 +27,7 @@
         android:id="@+id/signupPassFragment"
         android:name="ru.madfinal.launguageapp.presentation.auth.signupPass.SignupPassFragment"
         android:label="SignupPassFragment" />
-    <fragment
-        android:id="@+id/animalsFragment"
-        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsFragment"
-        android:label="fragment_animals"
-        tools:layout="@layout/fragment_animals" />
+
     <fragment
         android:id="@+id/gameFragment"
         android:name="ru.madfinal.launguageapp.presentation.exercise.game.GameFragment"
@@ -86,4 +82,40 @@
         android:name="ru.madfinal.launguageapp.presentation.exercise.wordpractice.WordPracticeFragment"
         android:label="fragment_word_practice"
         tools:layout="@layout/fragment_word_practice" />
+    <fragment
+        android:id="@+id/animalsErrorFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.states.AnimalsErrorFragment"
+        android:label="AnimalsErrorFragment">
+        <argument
+            android:name="correctWord"
+            android:defaultValue="unknown"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalsFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.AnimalsFragment"
+        android:label="fragment_animals"
+        tools:layout="@layout/fragment_animals">
+        <action
+            android:id="@+id/action_animalsFragment_to_animalsSuccessFragment"
+            app:destination="@id/animalsSuccessFragment">
+            <argument
+                android:name="animalName"
+                android:defaultValue="unknown"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_animalsFragment_to_animalsErrorFragment"
+            app:destination="@id/animalsErrorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalsSuccessFragment"
+        android:name="ru.madfinal.launguageapp.presentation.exercise.animals.states.AnimalsSuccessFragment"
+        android:label="Fragment Success"
+        tools:layout="@layout/fragment_animals_success">
+        <argument
+            android:name="animalName"
+            android:defaultValue="unknown"
+            app:argType="string" />
+    </fragment>
 </navigation>
