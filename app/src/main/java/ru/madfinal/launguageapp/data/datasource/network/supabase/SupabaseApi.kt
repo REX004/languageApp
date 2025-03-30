@@ -22,7 +22,10 @@ interface SupabaseApi {
     ): Single<AuthResponse>
 
     @POST("auth/v1/token?grant_type=${NetworkConfig.GRANT_TYPE_PASSWORD}")
-    fun signup(@Body request: SignupRequest): Single<AuthResponse>
+    fun signup(
+        @Body request: SignupRequest,
+        @Header("apiKey") apiKey: String
+    ): Single<AuthResponse>
 
     @POST("auth/v1/logout")
     fun logout(@Header("Authorization") authToken: String): Completable

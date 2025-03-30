@@ -205,6 +205,7 @@
             android:text="@string/not_you_member" />
 
         <TextView
+            android:id="@+id/signupBt"
             style="@style/body_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

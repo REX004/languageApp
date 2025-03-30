@@ -11,6 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.madfinal.launguageapp.R
 import ru.madfinal.launguageapp.data.datasource.locale.UserPreferences
 import ru.madfinal.launguageapp.presentation.common.UiState
+import ru.madfinal.launguageapp.presentation.util.navigateWithAnimation
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
@@ -34,6 +35,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
         binding.loginBt.setOnClickListener {
             performLogin()
+        }
+        binding.signupBt.setOnClickListener {
+            findNavController().navigateWithAnimation(R.id.signupFragment)
         }
     }
 
