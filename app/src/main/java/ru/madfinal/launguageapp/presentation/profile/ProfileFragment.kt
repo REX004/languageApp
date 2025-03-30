@@ -90,7 +90,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                             "Cropped file exists: ${file?.exists()}, path: ${file?.absolutePath}"
                         )
 
-                        // Устанавливаем изображение
                         binding.profileImage.setImageURI(null) // Сбрасываем текущее изображение
                         binding.profileImage.setImageURI(uri)  // Устанавливаем новое
 
@@ -106,7 +105,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     } catch (e: Exception) {
                         Log.e("ProfileFragment", "Error processing cropped image: ${e.message}", e)
                         waitingForCroppedImage = false
-                        loadSavedProfileImage() // Загружаем сохраненное изображение в случае ошибки
+                        loadSavedProfileImage()
                     }
                 } else {
                     Log.w("ProfileFragment", "Received empty cropped image URI")
@@ -122,7 +121,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         val newMode =
             if (isDarkMode) AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES
 
-        // Сохраняем новое значение и текст кнопки
         sharedPreferences.edit()
             .putBoolean("dark_mode", newIsDarkMode)
             .putString(
@@ -138,7 +136,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun logout() {
         sharedPreferences.edit().clear().apply()
 
-        val userPrefs = requireContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        val userPrefs =
+            requireContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
         userPrefs.edit().clear().apply()
 
         findNavController().navigateWithAnimation(R.id.loginFragment)

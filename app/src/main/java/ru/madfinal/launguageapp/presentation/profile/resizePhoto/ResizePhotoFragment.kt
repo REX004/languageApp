@@ -14,6 +14,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
+import androidx.core.net.toUri
 
 class ResizePhotoFragment :
     BaseFragment<FragmentResizePhotoBinding>(FragmentResizePhotoBinding::inflate) {
@@ -23,7 +24,7 @@ class ResizePhotoFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imageUri = Uri.parse(ResizePhotoFragmentArgs.fromBundle(it).imageUri)
+            imageUri = ResizePhotoFragmentArgs.fromBundle(it).imageUri.toUri()
         }
     }
 
@@ -41,13 +42,14 @@ class ResizePhotoFragment :
                 Log.d("ResizePhotoFragment", "croppedUri: $croppedUri")
 
                 if (croppedUri != null) {
-                    // Убедимся, что URI правильно передается
                     findNavController().previousBackStackEntry?.savedStateHandle?.set(
                         "croppedImage",
                         croppedUri.toString()
                     )
-                    // Добавьте дополнительное логирование
-                    Log.d("ResizePhotoFragment", "Setting savedStateHandle with URI: ${croppedUri.toString()}")
+                    Log.d(
+                        "ResizePhotoFragment",
+                        "Setting savedStateHandle with URI: $croppedUri"
+                    )
                     findNavController().popBackStack()
                 } else {
                     Log.e("ResizePhotoFragment", "Failed to save cropped image")
@@ -59,18 +61,21 @@ class ResizePhotoFragment :
     }
 
     private fun saveBitmapToFile(context: Context, bitmap: Bitmap): Uri? {
-        val fileName = "cropped_image_${UUID.randomUUID()}.jpg" // Unique file name
+        val fileName = "cropped_image_${UUID.randomUUID()}.jpg"
         val imagesDir =
-            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES) // Use app-specific storage
+            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val imageFile = File(imagesDir, fileName)
 
         try {
             FileOutputStream(imageFile).use { out ->
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out) // Compress as JPEG
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
             }
             val fileUri = Uri.fromFile(imageFile)
             Log.d("ResizePhotoFragment", "Saved image to: ${imageFile.absolutePath}")
-            Log.d("ResizePhotoFragment", "File exists: ${imageFile.exists()}, File size: ${imageFile.length()}")
+            Log.d(
+                "ResizePhotoFragment",
+                "File exists: ${imageFile.exists()}, File size: ${imageFile.length()}"
+            )
             return fileUri
         } catch (e: IOException) {
             Log.e("ResizePhotoFragment", "Error saving image: ${e.message}", e)
