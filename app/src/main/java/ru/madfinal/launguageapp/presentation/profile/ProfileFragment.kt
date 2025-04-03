@@ -17,7 +17,7 @@ import java.io.File
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
 
-    private lateinit var sharedPreferences: SharedPreferences;
+    private lateinit var sharedPreferences: SharedPreferences
     private var waitingForCroppedImage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,8 +146,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             uri?.let {
-                // НЕ сохраняем оригинальное изображение в SharedPreferences
-                // Просто переходим на экран обрезки
                 val action =
                     ProfileFragmentDirections.actionProfileFragmentToResizePhotoFragment(it.toString());
                 findNavController().navigate(action);
