@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat
 import androidx.navigation.fragment.findNavController;
 import ru.madfinal.launguageapp.R
 import ru.madfinal.launguageapp.databinding.FragmentProfileBinding;
@@ -71,6 +72,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             } catch (e: Exception) {
                 Log.e("ProfileFragment", "Error loading saved image: ${e.message}", e)
             }
+        }
+    }
+
+    private fun setAppLocale(languageCode: String) {
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+        AppCompatDelegate.setApplicationLocales(appLocale)
+        view?.post {
+            requireActivity().recreate()
         }
     }
 

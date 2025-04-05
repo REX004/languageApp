@@ -3,12 +3,14 @@ package ru.madfinal.launguageapp.presentation.auth.signup
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.madfinal.launguageapp.R
 import ru.madfinal.launguageapp.databinding.FragmentSignupBinding
 import ru.madfinal.launguageapp.presentation.common.UiState
 import ru.madfinal.launguageapp.presentation.common.base.BaseFragment
+import java.io.File
 
 class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
 
@@ -25,6 +27,10 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
         binding.backBt.setOnClickListener {
             backPressed()
+        }
+
+        binding.toolbarContainer.setOnClickListener {
+            showPdf()
         }
 
         binding.loginBt.setOnClickListener {
@@ -59,5 +65,20 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 }
             }
         }
+    }
+
+    private fun showPdf() {
+        binding.pdfChecker.initWithFile(
+            file = filePath()
+        )
+    }
+
+    private fun filePath(): File {
+        val tempFile = File(requireContext().cacheDir, "terms.pdf").apply {
+            outputStream().use { output ->
+                requireContext().assets.open("pdf/").use { it.copyTo(output) }
+            }
+        }
+        return tempFile
     }
 }

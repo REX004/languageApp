@@ -59,5 +59,6 @@
     <string name="check_my_speech">Check my speech</string>
     <string name="your_result">Your result</string>
     <string name="recognizing">Recognizing...</string>
+    <string name="some_error_text">Some error text</string>
 
 </resources>

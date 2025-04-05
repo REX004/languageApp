@@ -1,5 +1,6 @@
 package ru.madfinal.lastweeksproject.data.datasource.network.retrofit
 
+import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,4 +31,6 @@ object SupabaseNetworkModule {
     fun provideSupabaseApi(retrofit: Retrofit): SupabaseApi {
         return retrofit.create(SupabaseApi::class.java)
     }
+
+
 }

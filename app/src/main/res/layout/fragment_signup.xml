@@ -227,5 +227,10 @@
             android:textColor="@color/blue" />
     </LinearLayout>
 
+    <com.rajat.pdfviewer.PdfRendererView
+        android:id="@+id/pdfChecker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

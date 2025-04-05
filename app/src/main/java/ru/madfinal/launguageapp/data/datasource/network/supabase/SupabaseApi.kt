@@ -91,4 +91,10 @@ interface SupabaseApi {
         @Query("id") userId: String,
         @Body scoreUpdate: Map<String, Int>
     ): Completable
+
+    @GET("rest/v1/game")
+    fun getGameWords(
+        @Header("apiKey") apiKey: String,
+        @Query("select") fields: String = "id,english,russian,transcription_english"
+    ): Single<List<Word>>
 }

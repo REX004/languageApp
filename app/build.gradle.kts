@@ -148,4 +148,8 @@ dependencies {
     implementation("com.google.ar.sceneform:assets:$sceneform_version")
 
 
+    // PDF Viewer
+
+    implementation("io.github.afreakyelf:Pdf-Viewer:2.3.2")
+
 }

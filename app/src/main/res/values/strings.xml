@@ -62,4 +62,5 @@
     <string name="please_press_button_and_say_this_word_our_service_will_check_your_pronunciation">Please press button and say this word. Our service will check your pronunciation</string>
     <string name="check_my_speech">Check my speech</string>
     <string name="your_result">Your result</string>
+    <string name="some_error_text">Some error text</string>
 </resources>
