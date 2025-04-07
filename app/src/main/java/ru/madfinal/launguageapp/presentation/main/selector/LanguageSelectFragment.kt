@@ -2,6 +2,8 @@ package ru.madfinal.launguageapp.presentation.main.selector
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.google.android.material.card.MaterialCardView
 import ru.madfinal.launguageapp.data.datasource.locale.UserPreferences
 import ru.madfinal.launguageapp.databinding.FragmentLanguageSelectBinding
@@ -48,6 +50,14 @@ class LanguageSelectFragment :
         updateSelection(selectedLanguage)
     }
 
+
+    private fun loadLanguage(languageCode: String){
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+        AppCompatDelegate.setApplicationLocales(appLocale)
+        view?.let {
+
+        }
+    }
     private fun updateSelection(language: AppLanguage) {
         selectedLanguage = language
 

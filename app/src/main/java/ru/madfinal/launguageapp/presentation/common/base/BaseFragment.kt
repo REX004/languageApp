@@ -1,5 +1,8 @@
 package ru.madfinal.launguageapp.presentation.common.base
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,4 +54,9 @@ abstract class BaseFragment<VB : ViewBinding>(private val bindingInflater: (infl
 
     }
 
+    private fun isInternetAvailable(): Boolean {
+        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = cm.activeNetwork?: return false
+        val
+    }
 }
